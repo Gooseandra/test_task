@@ -41,6 +41,10 @@ func fetch(app *fiber.App, db *sql.DB) {
 			return c.SendString(err.Error())
 		}
 
+		if len(data) == 0 {
+			return c.SendString("no data")
+		}
+
 		priceStart, err := strconv.ParseFloat(data[0].price, 64)
 		if err != nil {
 			fmt.Println(err.Error())
