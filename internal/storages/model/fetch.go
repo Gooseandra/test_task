@@ -5,8 +5,8 @@ import (
 )
 
 type FetchCoins interface {
-	Fetch(string, time.Time, time.Time) ([]FetchData, error)
-	NewFetch(PriceData) (int, error)
+	FetchCoins(string, time.Time, time.Time) ([]FetchData, error)
+	NewFetchCoins(PriceData) (int, error)
 }
 
 type FetchData struct {

@@ -42,10 +42,10 @@ func main() {
 	}
 
 	subscribe := psql.NewPsqlSubscribe(db)
-	fetch := psql.NewPsqlFetch(db)
+	fetchCoins := psql.NewPsqlFetchCoins(db)
 	app.Subscribe = servises.NewSubscribe(subscribe)
-	app.Fetch = servises.NewFetch(fetch)
-	app.Binance = servises.NewBinance("https://api.binance.com/api/v3/ticker/price?symbol=", fetch, subscribe)
+	app.Fetch = servises.NewFetch(fetchCoins)
+	app.Binance = servises.NewBinance("https://api.binance.com/api/v3/ticker/price?symbol=", fetchCoins, subscribe)
 	app.Fib = fiber.Init(app)
 
 	err = app.Binance.Init()

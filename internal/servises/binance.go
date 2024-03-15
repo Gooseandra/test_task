@@ -86,11 +86,10 @@ func (b Binance) GetFromBinance(symbol string) {
 			return
 		}
 		fmt.Printf("Символ: %s\nЦена: %f USDT\n", price.Symbol, price.Price)
-		id, err := b.FetchStorage.NewFetch(price)
+		_, err = b.FetchStorage.NewFetchCoins(price)
 		if err != nil {
 			log.Println(err.Error())
 		}
-		fmt.Println(id)
 		time.Sleep(time.Minute)
 	}
 }

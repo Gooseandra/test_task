@@ -11,6 +11,6 @@ type Fetch struct {
 
 func NewFetch(storage model.FetchCoins) *Fetch { return &Fetch{storage: storage} }
 
-func (f Fetch) Fetch(Symbol string, DateFrom time.Time, DateTo time.Time) ([]model.FetchData, error) {
-	return f.storage.Fetch(Symbol, DateFrom, DateTo)
+func (f Fetch) FetchCoins(Symbol string, DateFrom time.Time, DateTo time.Time) ([]model.FetchData, error) {
+	return f.storage.FetchCoins(Symbol, DateFrom, DateTo)
 }

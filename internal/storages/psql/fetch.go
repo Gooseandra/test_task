@@ -15,9 +15,9 @@ type psqlFetch struct {
 	db *sql.DB
 }
 
-func NewPsqlFetch(db *sql.DB) *psqlFetch { return &psqlFetch{db: db} }
+func NewPsqlFetchCoins(db *sql.DB) *psqlFetch { return &psqlFetch{db: db} }
 
-func (f psqlFetch) Fetch(symbol string, timeFrom time.Time, timeTo time.Time) ([]model.FetchData, error) {
+func (f psqlFetch) FetchCoins(symbol string, timeFrom time.Time, timeTo time.Time) ([]model.FetchData, error) {
 	rows, err := f.db.Query(selectFetch, symbol, timeFrom, timeTo)
 	if err != nil {
 		return nil, err
@@ -35,7 +35,7 @@ func (f psqlFetch) Fetch(symbol string, timeFrom time.Time, timeTo time.Time) ([
 	return data, nil
 }
 
-func (f psqlFetch) NewFetch(data model.PriceData) (int, error) {
+func (f psqlFetch) NewFetchCoins(data model.PriceData) (int, error) {
 	var id int
 	err := f.db.QueryRow(insertData, data.Symbol, data.Price, time.Now()).Scan(&id)
 	if err != nil {

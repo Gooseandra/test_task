@@ -9,11 +9,19 @@ func Init(app app.App) *fiber.App {
 	result := fiber.New()
 
 	result.Post("/subscribe", func(c *fiber.Ctx) error {
-		return c.SendString(subscribe(c, app))
+		serverAnswer, err := subscribe(c, app)
+		if err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		}
+		return c.SendString(serverAnswer)
 	})
 
 	result.Get("/fetch", func(c *fiber.Ctx) error {
-		return c.SendString(fetch(c, app))
+		serverAnswer, err := fetchCoins(c, app)
+		if err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		}
+		return c.SendString(serverAnswer)
 	})
 
 	return result
